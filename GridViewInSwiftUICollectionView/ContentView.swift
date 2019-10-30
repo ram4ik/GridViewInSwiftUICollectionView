@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello World")
+        grid()
     }
 }
 
@@ -19,3 +19,28 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct grid: View {
+    var body: some View {
+        GeometryReader { geo in
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    ForEach(1..<6) { i in
+                        HStack {
+                            Image("img\(i)")
+                                .resizable()
+                                .frame(width: geo.size.width / 2 - 20)
+                                .cornerRadius(15)
+                            Image("img\(i)")
+                                .resizable()
+                                .frame(width: geo.size.width / 2 - 20)
+                                .cornerRadius(15)
+                        }.frame(height: UIDevice.current.orientation.isLandscape ? 300 : 150)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// when screen is rotated images are streching to avoid this...
